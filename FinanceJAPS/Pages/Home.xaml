@@ -1,0 +1,265 @@
+<ContentPage
+    x:Class="FinanceJAPS.Pages.Home"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Home">
+    <Grid BackgroundColor="#E9FFFB">
+        <!--  Definir las filas principales  -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!--  Contenido desplazable  -->
+            <RowDefinition Height="Auto" />
+            <!--  Menú inferior fijo  -->
+        </Grid.RowDefinitions>
+
+        <!--  Contenido desplazable  -->
+        <ScrollView Grid.Row="0">
+            <Grid
+                Padding="20"
+                ColumnSpacing="10"
+                RowSpacing="10">
+                <!--  Definir las filas y columnas  -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!--  Header  -->
+                <StackLayout
+                    Grid.Row="0"
+                    Orientation="Vertical"
+                    Spacing="5">
+                    <Label
+                        FontSize="20"
+                        Text="Hi, Welcome Back"
+                        TextColor="Black" />
+                    <Label
+                        FontSize="14"
+                        Text="Good Morning"
+                        TextColor="#757575" />
+                    <Frame
+                        Padding="10"
+                        BackgroundColor="#00E5FF"
+                        CornerRadius="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label
+                                    FontSize="18"
+                                    Text="Total Balance"
+                                    TextColor="White" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="28"
+                                    Text="$7,783.00"
+                                    TextColor="White" />
+                            </StackLayout>
+                            <StackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontSize="16"
+                                    Text="Expenses"
+                                    TextColor="White" />
+                                <Label
+                                    FontSize="18"
+                                    Text="-$11,187.40"
+                                    TextColor="Red" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+
+                <!--  Quick Stats  -->
+                <StackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Frame
+                        Padding="10"
+                        BackgroundColor="#00E5FF"
+                        CornerRadius="10"
+                        WidthRequest="150">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Savings On Goals"
+                                TextColor="White" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$4,000.00"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame
+                        Padding="10"
+                        BackgroundColor="#00E5FF"
+                        CornerRadius="10"
+                        WidthRequest="150">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Food Last Week"
+                                TextColor="White" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="-$100.00"
+                                TextColor="Red" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <!--  Transaction List  -->
+                <StackLayout
+                    Grid.Row="2"
+                    Padding="0"
+                    Orientation="Vertical"
+                    Spacing="10">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Transactions"
+                        TextColor="Black" />
+                    <Frame
+                        Padding="10"
+                        BackgroundColor="White"
+                        CornerRadius="10">
+                        <HorizontalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Salary"
+                                TextColor="Black" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="EndAndExpand"
+                                Text="$4,000.00"
+                                TextColor="Black" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame
+                        Padding="10"
+                        BackgroundColor="White"
+                        CornerRadius="10">
+                        <HorizontalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Groceries"
+                                TextColor="Black" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="EndAndExpand"
+                                Text="-$100.00"
+                                TextColor="Red" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!--  Menú inferior fijo  -->
+        <Grid
+            Grid.Row="1"
+            Padding="10"
+            BackgroundColor="White"
+            ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Botones del Menú  -->
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                <Image
+                    HeightRequest="64"
+                    Source="home.png"
+                    WidthRequest="64" />
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="Home"
+                    TextColor="#00E5FF" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="Home" Tapped="NavigateToPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+            <!--  Budget  -->
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                <Image
+                    HeightRequest="64"
+                    Source="budget.png"
+                    WidthRequest="64" />
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="Budget"
+                    TextColor="#00E5FF" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="Budget" Tapped="NavigateToPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+            <!--  Transactions  -->
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                <Image
+                    HeightRequest="64"
+                    Source="transaction.png"
+                    WidthRequest="64" />
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="Transactions"
+                    TextColor="#00E5FF" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="Transactions" Tapped="NavigateToPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+            <!--  Analisys  -->
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
+                <Image
+                    HeightRequest="64"
+                    Source="analisys.png"
+                    WidthRequest="64" />
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="Analisys"
+                    TextColor="#00E5FF" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="Analisys" Tapped="NavigateToPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+
+            <!--  Settings  -->
+            <VerticalStackLayout Grid.Column="4" HorizontalOptions="Center">
+                <Image
+                    HeightRequest="64"
+                    Source="settings.png"
+                    WidthRequest="64" />
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="Settings"
+                    TextColor="#00E5FF" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="Settings" Tapped="NavigateToPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+
+        </Grid>
+    </Grid>
+</ContentPage>
+
+
+

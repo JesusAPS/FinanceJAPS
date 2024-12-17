@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FinanceJAPS.Pages.Analisys"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Analisys">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!--  Gráfico Circular  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Spending by Category"
+                        TextColor="Black" />
+                    <!--  Aquí iría el gráfico circular  -->
+                    <Image HeightRequest="200" Source="placeholder_piechart.png" />
+                </StackLayout>
+            </Frame>
+
+            <!--  Gráfico de Barras  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Income vs Expenses"
+                        TextColor="Black" />
+                    <!--  Aquí iría el gráfico de barras  -->
+                    <Image HeightRequest="200" Source="placeholder_barchart.png" />
+                </StackLayout>
+            </Frame>
+
+            <!--  Estadísticas Rápidas  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Quick Stats"
+                        TextColor="Black" />
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Top Category"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="Food"
+                                TextColor="Black" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Savings"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$4,000.00"
+                                TextColor="Green" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Daily Avg. Spend"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$50.00"
+                                TextColor="Red" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!--  Sugerencias  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Insights"
+                        TextColor="Black" />
+                    <Label Text="Try to limit your dining expenses to save more this month!" TextColor="Gray" />
+                </StackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

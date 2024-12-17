@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FinanceJAPS.Pages.Budget"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Budget">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!--  Resumen del Presupuesto  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Monthly Budget Overview"
+                        TextColor="Black" />
+                    <!--  Gráfico Circular  -->
+                    <Image HeightRequest="200" Source="placeholder_piechart.png" />
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Total Budget"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$3,000.00"
+                                TextColor="Black" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Spent"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$1,500.00"
+                                TextColor="Red" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Remaining"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$1,500.00"
+                                TextColor="Green" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!--  Presupuestos por Categoría  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Budgets by Category"
+                        TextColor="Black" />
+
+                    <!--  Categoría 1  -->
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+                        <Label
+                            FontSize="16"
+                            Text="Food"
+                            TextColor="Black" />
+                        <ProgressBar HorizontalOptions="FillAndExpand" Progress="0.6" />
+                        <Label
+                            FontSize="14"
+                            Text="$300/$500"
+                            TextColor="Gray" />
+                    </HorizontalStackLayout>
+
+                    <!--  Categoría 2  -->
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+                        <Label
+                            FontSize="16"
+                            Text="Transport"
+                            TextColor="Black" />
+                        <ProgressBar HorizontalOptions="FillAndExpand" Progress="0.8" />
+                        <Label
+                            FontSize="14"
+                            Text="$80/$100"
+                            TextColor="Gray" />
+                    </HorizontalStackLayout>
+
+                    <!--  Categoría 3  -->
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+                        <Label
+                            FontSize="16"
+                            Text="Entertainment"
+                            TextColor="Black" />
+                        <ProgressBar
+                            HorizontalOptions="FillAndExpand"
+                            Progress="1.2"
+                            ProgressColor="Red" />
+                        <Label
+                            FontSize="14"
+                            Text="$120/$100"
+                            TextColor="Gray" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!--  Configuración  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Manage Your Budget"
+                        TextColor="Black" />
+                    <Button
+                        BackgroundColor="#00E5FF"
+                        Text="Add New Category"
+                        TextColor="White" />
+                    <Button
+                        BackgroundColor="#00E5FF"
+                        Text="Edit Monthly Budget"
+                        TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

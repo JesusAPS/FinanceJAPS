@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FinanceJAPS.Pages.Transactions"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Transactions">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!--  Resumen de Transacciones  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Transactions Overview"
+                        TextColor="Black" />
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Total Income"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$5,000.00"
+                                TextColor="Green" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Total Expenses"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$3,200.00"
+                                TextColor="Red" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="14"
+                                Text="Net Balance"
+                                TextColor="Gray" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="$1,800.00"
+                                TextColor="Black" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!--  Lista de Transacciones  -->
+            <VerticalStackLayout>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="Recent Transactions"
+                    TextColor="Black" />
+
+                <!--  Transacción 1  -->
+                <Frame
+                    Padding="10"
+                    BackgroundColor="White"
+                    CornerRadius="10">
+                    <HorizontalStackLayout>
+                        <Image
+                            HeightRequest="24"
+                            Source="icon_income.png"
+                            WidthRequest="24" />
+                        <VerticalStackLayout Spacing="2">
+                            <Label
+                                FontSize="16"
+                                Text="Salary"
+                                TextColor="Black" />
+                            <Label
+                                FontSize="12"
+                                Text="01 Dec 2024"
+                                TextColor="Gray" />
+                        </VerticalStackLayout>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalOptions="EndAndExpand"
+                            Text="+$4,000.00"
+                            TextColor="Green" />
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!--  Transacción 2  -->
+                <Frame
+                    Padding="10"
+                    BackgroundColor="White"
+                    CornerRadius="10">
+                    <HorizontalStackLayout>
+                        <Image
+                            HeightRequest="24"
+                            Source="icon_expense.png"
+                            WidthRequest="24" />
+                        <VerticalStackLayout Spacing="2">
+                            <Label
+                                FontSize="16"
+                                Text="Groceries"
+                                TextColor="Black" />
+                            <Label
+                                FontSize="12"
+                                Text="03 Dec 2024"
+                                TextColor="Gray" />
+                        </VerticalStackLayout>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalOptions="EndAndExpand"
+                            Text="-$150.00"
+                            TextColor="Red" />
+                    </HorizontalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!--  Filtros y Búsqueda  -->
+            <Frame BackgroundColor="White" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Filters"
+                        TextColor="Black" />
+                    <HorizontalStackLayout Spacing="10">
+                        <Picker Title="Category" />
+                        <DatePicker Format="dd MMM yyyy" />
+                        <Picker Title="Type">
+                            <Picker.Items>
+                                <x:String>All</x:String>
+                                <x:String>Income</x:String>
+                                <x:String>Expense</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

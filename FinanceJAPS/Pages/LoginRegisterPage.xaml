@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinanceJAPS.Pages.LoginRegisterPage"
+             Title="Login / Registro">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Título Dinámico -->
+            <Label x:Name="TitleLabel"
+                   Text="Iniciar Sesión"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
+
+            <!-- Email -->
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Correo electrónico"
+                   Keyboard="Email" />
+
+            <!-- Password -->
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Contraseña"
+                   IsPassword="True" />
+
+            <!-- Confirmar Password (visible solo en Registro) -->
+            <Entry x:Name="ConfirmPasswordEntry"
+                   Placeholder="Confirmar contraseña"
+                   IsPassword="True"
+                   IsVisible="False" />
+
+            <!-- Botón Dinámico -->
+            <Button x:Name="ActionButton"
+                    Text="Iniciar Sesión"
+                    Clicked="OnActionButtonClicked"
+                    BackgroundColor="#512BD4"
+                    TextColor="White" />
+
+            <!-- Switch entre Login/Registro -->
+            <Label x:Name="SwitchLabel"
+                   Text="¿No tienes cuenta? Regístrate aquí"
+                   TextColor="Blue"
+                   HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSwitchTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+
