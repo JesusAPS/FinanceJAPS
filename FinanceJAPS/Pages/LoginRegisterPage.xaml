@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FinanceJAPS.Pages.LoginRegisterPage"
-             Title="Login / Registro">
+<ContentPage
+    x:Class="FinanceJAPS.Pages.LoginRegisterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Login / Registro">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-            <!-- Título Dinámico -->
-            <Label x:Name="TitleLabel"
-                   Text="Iniciar Sesión"
-                   FontSize="24"
-                   HorizontalOptions="Center" />
+            <!--  Título Dinámico  -->
+            <Label
+                x:Name="TitleLabel"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Iniciar Sesión" />
 
-            <!-- Email -->
-            <Entry x:Name="EmailEntry"
-                   Placeholder="Correo electrónico"
-                   Keyboard="Email" />
+            <!--  Email  -->
+            <Entry
+                x:Name="EmailEntry"
+                Keyboard="Email"
+                Placeholder="Correo electrónico" />
 
-            <!-- Password -->
-            <Entry x:Name="PasswordEntry"
-                   Placeholder="Contraseña"
-                   IsPassword="True" />
+            <!--  Password  -->
+            <Entry
+                x:Name="PasswordEntry"
+                IsPassword="True"
+                Placeholder="Contraseña" />
 
-            <!-- Confirmar Password (visible solo en Registro) -->
-            <Entry x:Name="ConfirmPasswordEntry"
-                   Placeholder="Confirmar contraseña"
-                   IsPassword="True"
-                   IsVisible="False" />
+            <!--  Confirmar Password (visible solo en Registro)  -->
+            <Entry
+                x:Name="ConfirmPasswordEntry"
+                IsPassword="True"
+                IsVisible="False"
+                Placeholder="Confirmar contraseña" />
 
-            <!-- Botón Dinámico -->
-            <Button x:Name="ActionButton"
-                    Text="Iniciar Sesión"
-                    Clicked="OnActionButtonClicked"
-                    BackgroundColor="#512BD4"
-                    TextColor="White" />
+            <!--  Botón Dinámico  -->
+            <Button
+                x:Name="ActionButton"
+                BackgroundColor="#512BD4"
+                Text="Iniciar Sesión"
+                TextColor="White" />
 
-            <!-- Switch entre Login/Registro -->
-            <Label x:Name="SwitchLabel"
-                   Text="¿No tienes cuenta? Regístrate aquí"
-                   TextColor="Blue"
-                   HorizontalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnSwitchTapped" />
-                </Label.GestureRecognizers>
-            </Label>
+            <!--  Switch entre Login/Registro  -->
+            <Label
+                x:Name="SwitchLabel"
+                HorizontalOptions="Center"
+                Text="¿No tienes cuenta? Regístrate aquí"
+                TextColor="Blue" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
