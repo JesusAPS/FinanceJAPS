@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using System.IO;
-
+using FinanceJAPS.Data.Models;
 
 public class DatabaseService
 {
@@ -26,5 +26,5 @@ public class DatabaseService
         _database.CreateTable<Transaction>();
     }
 
-    // Métodos para insertar y consultar datos (ejemplificados antes)
+    // Métodos para insertar y consultar datos 
 }
