@@ -1,0 +1,113 @@
+<ContentPage
+    x:Class="FinanceJAPS.Pages.SecurityPin"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F5FFF8">
+
+    <Grid>
+        <!--  Encabezado  -->
+        <BoxView BackgroundColor="#04C7A6" HeightRequest="200" />
+
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20">
+                <!--  Título  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    Text="Security Pin"
+                    TextColor="Black" />
+
+                <!--  Campo de código PIN  -->
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Entry
+                        BackgroundColor="#E8FFF8"
+                        FontSize="24"
+                        HeightRequest="50"
+                        Keyboard="Numeric"
+                        Placeholder="2"
+                        WidthRequest="40" />
+                    <Entry
+                        BackgroundColor="#E8FFF8"
+                        FontSize="24"
+                        HeightRequest="50"
+                        Keyboard="Numeric"
+                        Placeholder="7"
+                        WidthRequest="40" />
+                    <Entry
+                        BackgroundColor="#E8FFF8"
+                        FontSize="24"
+                        HeightRequest="50"
+                        Keyboard="Numeric"
+                        Placeholder="3"
+                        WidthRequest="40" />
+                    <Entry
+                        BackgroundColor="#E8FFF8"
+                        FontSize="24"
+                        HeightRequest="50"
+                        Keyboard="Numeric"
+                        Placeholder="9"
+                        WidthRequest="40" />
+                    <Entry
+                        BackgroundColor="#E8FFF8"
+                        FontSize="24"
+                        HeightRequest="50"
+                        Keyboard="Numeric"
+                        Placeholder="1"
+                        WidthRequest="40" />
+                    <Entry
+                        BackgroundColor="#E8FFF8"
+                        FontSize="24"
+                        HeightRequest="50"
+                        Keyboard="Numeric"
+                        Placeholder="6"
+                        WidthRequest="40" />
+                </StackLayout>
+
+                <!--  Botones  -->
+                <Button
+                    BackgroundColor="#04C7A6"
+                    CornerRadius="25"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="Accept"
+                    TextColor="White" />
+                <Button
+                    BackgroundColor="#E8FFF8"
+                    CornerRadius="25"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="Send Again"
+                    TextColor="#04C7A6" />
+
+                <!--  Social Media  -->
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="or sign up with"
+                    TextColor="#6E6E6E" />
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Image
+                        HeightRequest="32"
+                        Source="google_icon.png"
+                        WidthRequest="32" />
+                    <Image
+                        HeightRequest="32"
+                        Source="facebook_icon.png"
+                        WidthRequest="32" />
+                </StackLayout>
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Don't have an account? Sign Up"
+                    TextColor="#04C7A6" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

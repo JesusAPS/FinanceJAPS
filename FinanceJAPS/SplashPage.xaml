@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FinanceJAPS.SplashPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="SplashPage"
+    BackgroundColor="#04C7A6">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Image
+            HeightRequest="150"
+            Source="Resources/Images/icon_as.jpg"
+            WidthRequest="150" />
+        <Label
+            FontAttributes="Bold"
+            FontSize="36"
+            HorizontalOptions="Center"
+            Text="Finance JAPS"
+            TextColor="White" />
+    </StackLayout>
+</ContentPage>

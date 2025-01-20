@@ -1,0 +1,101 @@
+<ContentPage
+    x:Class="FinanceJAPS.Pages.Register"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F5FFF8">
+
+    <Grid>
+        <!--  Header  -->
+        <BoxView BackgroundColor="#04C7A6" HeightRequest="200" />
+
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="15">
+                <!--  Título  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    Text="Create Account"
+                    TextColor="Black" />
+
+                <!--  Inputs  -->
+                <Entry
+                    BackgroundColor="#E8FFF8"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Placeholder="Full Name"
+                    TextColor="Black" />
+                <Entry
+                    BackgroundColor="#E8FFF8"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Placeholder="Email"
+                    TextColor="Black" />
+                <Entry
+                    BackgroundColor="#E8FFF8"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Placeholder="Mobile Number"
+                    TextColor="Black" />
+                <Entry
+                    BackgroundColor="#E8FFF8"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Placeholder="Date Of Birth"
+                    TextColor="Black" />
+                <StackLayout
+                    BackgroundColor="#E8FFF8"
+                    HeightRequest="50"
+                    Orientation="Horizontal">
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontSize="16"
+                        HorizontalOptions="FillAndExpand"
+                        IsPassword="True"
+                        Placeholder="Password" />
+                    <Image
+                        Margin="10,0"
+                        HeightRequest="24"
+                        Source="eye_icon.png"
+                        WidthRequest="24" />
+                </StackLayout>
+                <StackLayout
+                    BackgroundColor="#E8FFF8"
+                    HeightRequest="50"
+                    Orientation="Horizontal">
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontSize="16"
+                        HorizontalOptions="FillAndExpand"
+                        IsPassword="True"
+                        Placeholder="Confirm Password" />
+                    <Image
+                        Margin="10,0"
+                        HeightRequest="24"
+                        Source="eye_icon.png"
+                        WidthRequest="24" />
+                </StackLayout>
+
+                <!--  Términos y Botón  -->
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="By continuing, you agree to Terms of Use and Privacy Policy."
+                    TextColor="#6E6E6E" />
+                <Button
+                    BackgroundColor="#04C7A6"
+                    CornerRadius="25"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="Sign Up"
+                    TextColor="White" />
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Already have an account? Log In"
+                    TextColor="#04C7A6" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

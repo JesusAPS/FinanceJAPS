@@ -1,0 +1,94 @@
+<ContentPage
+    x:Class="FinanceJAPS.Pages.Login"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F5FFF8">
+
+    <Grid>
+        <!--  Header  -->
+        <BoxView BackgroundColor="#04C7A6" HeightRequest="200" />
+
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20">
+                <!--  Título  -->
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    Text="Welcome"
+                    TextColor="Black" />
+
+                <!--  Inputs  -->
+                <Entry
+                    BackgroundColor="#E8FFF8"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Placeholder="Username Or Email"
+                    TextColor="Black" />
+                <StackLayout
+                    BackgroundColor="#E8FFF8"
+                    HeightRequest="50"
+                    Orientation="Horizontal">
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontSize="16"
+                        HorizontalOptions="FillAndExpand"
+                        IsPassword="True"
+                        Placeholder="Password" />
+                    <Image
+                        Margin="10,0"
+                        HeightRequest="24"
+                        Source="eye_icon.png"
+                        WidthRequest="24" />
+                </StackLayout>
+
+                <!--  Botones  -->
+                <Button
+                    BackgroundColor="#04C7A6"
+                    CornerRadius="25"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="Log In"
+                    TextColor="White" />
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Forgot Password?"
+                    TextColor="#6E6E6E" />
+
+                <Button
+                    BackgroundColor="#E8FFF8"
+                    CornerRadius="25"
+                    FontSize="16"
+                    HeightRequest="50"
+                    Text="Sign Up"
+                    TextColor="#04C7A6" />
+
+                <!--  Texto adicional  -->
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Use Fingerprint To Access"
+                    TextColor="#6E6E6E" />
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Image
+                        HeightRequest="32"
+                        Source="google_icon.png"
+                        WidthRequest="32" />
+                    <Image
+                        HeightRequest="32"
+                        Source="facebook_icon.png"
+                        WidthRequest="32" />
+                </StackLayout>
+                <Label
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Don't have an account? Sign Up"
+                    TextColor="#04C7A6" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

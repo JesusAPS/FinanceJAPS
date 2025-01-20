@@ -2,32 +2,69 @@
 <ContentPage
     x:Class="FinanceJAPS.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#04C7A6">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="25">
-            <Image
-                Aspect="AspectFit"
-                HeightRequest="185"
-                Source="logito.png" />
+    <StackLayout
+        Padding="30"
+        HorizontalOptions="Center"
+        Spacing="20"
+        VerticalOptions="Center">
+        <!--  Logo  -->
+        <Image
+            HeightRequest="150"
+            Source="logito.png"
+            WidthRequest="150" />
 
-            <Label
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="Hello" />
+        <!--  Título  -->
+        <Label
+            FontAttributes="Bold"
+            FontSize="36"
+            HorizontalOptions="Center"
+            Text="Finance JAPS"
+            TextColor="#04C7A6" />
 
-            <Label
-                SemanticProperties.Description=""
-                SemanticProperties.HeadingLevel="Level2"
-                Style="{StaticResource SubHeadline}"
-                Text="Welcome to the Finance " />
+        <!--  Subtítulo  -->
+        <Label
+            FontSize="14"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+            TextColor="#6E6E6E" />
 
-            <Button
-                x:Name="CounterBtn"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill"
-                Text="Iniciar " />
-        </VerticalStackLayout>
-    </ScrollView>
+        <!--  Botones  -->
+        <Button
+            x:Name="LoginButton"
+            BackgroundColor="#04C7A6"
+            Clicked="LoginButton_Clicked"
+            CornerRadius="25"
+            FontSize="16"
+            HeightRequest="50"
+            Text="Log In"
+            TextColor="White"
+            WidthRequest="200" />
+        <Button
+            x:Name="RegisterButton"
+            BackgroundColor="#E8FFF8"
+            Clicked="RegisterButton_Clicked"
+            CornerRadius="25"
+            FontSize="16"
+            HeightRequest="50"
+            Text="Sign Up"
+            TextColor="#04C7A6"
+            WidthRequest="200" />
+
+        <!--  Enlace para recuperar contraseña  -->
+        <Label
+            FontSize="14"
+            HorizontalOptions="Center"
+            Text="Forgot Password?"
+            TextColor="#6E6E6E">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnForgotPasswordTapped" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    </StackLayout>
 
 </ContentPage>
