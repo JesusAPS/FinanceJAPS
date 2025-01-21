@@ -60,4 +60,8 @@ public class DatabaseService
 
     public Task<Users> GetUserByEmailAsync(string email) => Task.FromResult(_database.Table<Users>().FirstOrDefault(u => u.Email == email));
 
+    internal object Table<T>()
+    {
+        throw new NotImplementedException();
+    }
 }

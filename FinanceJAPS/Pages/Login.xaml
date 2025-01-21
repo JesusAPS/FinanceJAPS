@@ -20,21 +20,24 @@
 
                 <!--  Inputs  -->
                 <Entry
-                    BackgroundColor="#E8FFF8"
+                    x:Name="Username"
+                    BackgroundColor="Black"
                     FontSize="16"
                     HeightRequest="50"
                     Placeholder="Username Or Email"
-                    TextColor="Black" />
+                    TextColor="White" />
                 <StackLayout
                     BackgroundColor="#E8FFF8"
                     HeightRequest="50"
                     Orientation="Horizontal">
                     <Entry
-                        BackgroundColor="Transparent"
+                        x:Name="PasswordHash"
+                        BackgroundColor="Black"
                         FontSize="16"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
-                        Placeholder="Password" />
+                        Placeholder="Password"
+                        TextColor="White" />
                     <Image
                         Margin="10,0"
                         HeightRequest="24"
@@ -44,7 +47,9 @@
 
                 <!--  Botones  -->
                 <Button
+                    x:Name="LogIn"
                     BackgroundColor="#04C7A6"
+                    Clicked="LogIn_Clicked"
                     CornerRadius="25"
                     FontSize="16"
                     HeightRequest="50"
@@ -57,7 +62,9 @@
                     TextColor="#6E6E6E" />
 
                 <Button
+                    x:Name="SignUp"
                     BackgroundColor="#E8FFF8"
+                    Clicked="SignUp_Clicked"
                     CornerRadius="25"
                     FontSize="16"
                     HeightRequest="50"
