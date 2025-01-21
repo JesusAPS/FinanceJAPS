@@ -19,7 +19,7 @@ namespace FinanceJAPS.Data.Models
         [Ignore]
         public List<Budget> Budgets { get; set; } // Presupuestos asociados
         [Ignore]
-        public List<Transaction> Transactions { get; set; } // Transacciones asociadas
+        public List<Transactions> Transactions { get; set; } // Transacciones asociadas
     }
 }
 

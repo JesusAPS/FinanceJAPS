@@ -8,7 +8,7 @@ using System.IO;
 
 namespace FinanceJAPS.Data.Models
 {
-    public class Transaction
+    public class Transactions
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } // Identificador único para la transacción

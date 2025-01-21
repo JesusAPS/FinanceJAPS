@@ -23,7 +23,7 @@ public class DatabaseService
     _database.CreateTable<Users>();
     _database.CreateTable<Category>();
     _database.CreateTable<Budget>();
-    _database.CreateTable<Transaction>();
+    _database.CreateTable<Transactions>();
 
      Console.WriteLine($"Base de datos inicializada en: {databasePath}");
 }
