@@ -12,19 +12,52 @@ public class DatabaseService
     private readonly SQLiteConnection _database;
 
     public DatabaseService()
+{
+    // Obtiene la ruta del directorio donde se ejecuta la aplicación
+    var databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "financeJAPS.db3");
+
+    // Crea una conexión a la base de datos SQLite
+    _database = new SQLiteConnection(databasePath);
+
+    // Crea las tablas en la base de datos (si no existen)
+    _database.CreateTable<Users>();
+    _database.CreateTable<Category>();
+    _database.CreateTable<Budget>();
+    _database.CreateTable<Transaction>();
+
+     Console.WriteLine($"Base de datos inicializada en: {databasePath}");
+}
+
+    //Agregar Usuarios
+    internal Task<bool> InsertUserAsync(Users user)
     {
-        // Obtiene la ruta para guardar el archivo de la base de datos
-        var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "financeApp.db3");
+        try
+        {
+            // Verificar si el correo ya existe
+            var existingUser = _database.Table<Users>().FirstOrDefault(u => u.Email == user.Email);
+            if (existingUser != null)
+            {
+                Console.WriteLine("El correo ya está en uso.");
+                return Task.FromResult(false); // Retorna false si el correo ya existe
+            }
 
-        // Crea una conexión a la base de datos SQLite
-        _database = new SQLiteConnection(databasePath);
-
-        // Crea las tablas en la base de datos (si no existen)
-        _database.CreateTable<Users>();
-        _database.CreateTable<Category>();
-        _database.CreateTable<Budget>();
-        _database.CreateTable<Transaction>();
+            // Inserta el usuario en la base de datos
+            _database.Insert(user);
+            return Task.FromResult(true);
+        }
+        catch (Exception ex)
+        {
+            // Manejo de errores
+            Console.WriteLine($"Error al insertar usuario: {ex.Message}");
+            return Task.FromResult(false);
+        }
     }
 
-    // Métodos para insertar y consultar datos 
+    public Task<List<Users>> GetAllUsersAsync()
+    {
+        return Task.FromResult(_database.Table<Users>().ToList());
+    }
+
+    public Task<Users> GetUserByEmailAsync(string email) => Task.FromResult(_database.Table<Users>().FirstOrDefault(u => u.Email == email));
+
 }

@@ -20,35 +20,26 @@
 
                 <!--  Inputs  -->
                 <Entry
+                    x:Name="FullName"
                     BackgroundColor="#E8FFF8"
                     FontSize="16"
                     HeightRequest="50"
                     Placeholder="Full Name"
                     TextColor="Black" />
                 <Entry
+                    x:Name="Email"
                     BackgroundColor="#E8FFF8"
                     FontSize="16"
                     HeightRequest="50"
                     Placeholder="Email"
-                    TextColor="Black" />
-                <Entry
-                    BackgroundColor="#E8FFF8"
-                    FontSize="16"
-                    HeightRequest="50"
-                    Placeholder="Mobile Number"
-                    TextColor="Black" />
-                <Entry
-                    BackgroundColor="#E8FFF8"
-                    FontSize="16"
-                    HeightRequest="50"
-                    Placeholder="Date Of Birth"
                     TextColor="Black" />
                 <StackLayout
                     BackgroundColor="#E8FFF8"
                     HeightRequest="50"
                     Orientation="Horizontal">
                     <Entry
-                        BackgroundColor="Transparent"
+                        x:Name="Password"
+                        BackgroundColor="Black"
                         FontSize="16"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
@@ -64,7 +55,8 @@
                     HeightRequest="50"
                     Orientation="Horizontal">
                     <Entry
-                        BackgroundColor="Transparent"
+                        x:Name="ConfirmPassword"
+                        BackgroundColor="Black"
                         FontSize="16"
                         HorizontalOptions="FillAndExpand"
                         IsPassword="True"
@@ -85,6 +77,7 @@
                     TextColor="#6E6E6E" />
                 <Button
                     BackgroundColor="#04C7A6"
+                    Clicked="OnSignUpButtonClicked"
                     CornerRadius="25"
                     FontSize="16"
                     HeightRequest="50"
