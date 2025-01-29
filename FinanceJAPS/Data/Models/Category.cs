@@ -10,16 +10,16 @@ namespace FinanceJAPS.Data.Models
     public class Category
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; } // Identificador único para la categoría
-        public string Name { get; set; } // Nombre de la categoría
+        public int CategoryID { get; set; } // Identificador único para la categoría
+        public required string Namecategory { get; set; } // Nombre de la categoría
         [Indexed]
-        public string Type { get; set; } // Tipo: 'Ingreso' o 'Gasto'
+        public required string Type { get; set; } // Tipo: 'Ingreso' o 'Gasto'
 
         // Relación con Budget y Transaction
         [Ignore]
-        public List<Budget> Budgets { get; set; } // Presupuestos asociados
+        public required List<Budget> Budgets { get; set; } // Presupuestos asociados
         [Ignore]
-        public List<Transactions> Transactions { get; set; } // Transacciones asociadas
+        public required List<Transactions> Transactions { get; set; } // Transacciones asociadas
     }
 }
 

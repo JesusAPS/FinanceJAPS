@@ -1,79 +1,71 @@
-using FinanceJAPS.Data.Models;
-using System.Security.Cryptography;
-using System.Text;
+using FinanceJAPS.Data.Models; // Espacio de nombres para los modelos de datos
+using System.Security.Cryptography; // Espacio de nombres para usar algoritmos de hash
+using System.Text; // Espacio de nombres para manipular cadenas
+using System.Threading.Tasks;
 
 namespace FinanceJAPS.Pages;
-
 public partial class Login : ContentPage
 {
-    private readonly DatabaseService _databaseService; // Servicio para interactuar con la base de datos
+    private readonly DatabaseService _databaseService;
 
     public Login()
     {
         InitializeComponent();
-        _databaseService = new DatabaseService(); // Crea una instancia del servicio de base de datos
+        _databaseService = new DatabaseService();
     }
 
     private async void LogIn_Clicked(object sender, EventArgs e)
     {
-        var username = Username.Text;
+        var email = Username.Text;
         var password = PasswordHash.Text;
 
-        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
             await DisplayAlert("Error", "Por favor, completa todos los campos correctamente.", "OK");
             return;
         }
 
-        await VerifyPasswordAsync(username, password);
+        if (!email.Contains("@") || !email.Contains("."))
+        {
+            await DisplayAlert("Error", "Por favor, introduce un correo electrónico válido.", "OK");
+            return;
+        }
+
+        await VerifyPasswordAsync(email, password);
     }
 
-    // Método para verificar la contraseña ingresada en el login
     public async Task VerifyPasswordAsync(string email, string inputPassword)
     {
-        // Busca al usuario por correo en la base de datos
-        var user = await _databaseService.GetUserByEmailAsync(email); // Espera el resultado del método
-
-        if (user == null)
+        try
         {
-            await DisplayAlert("Error", "El usuario no existe.", "OK");
-            return;
+            var user = await _databaseService.GetUserByEmailAsync(email);
+
+            if (user == null)
+            {
+                await DisplayAlert("Error", "El usuario no existe.", "OK");
+                return;
+            }
+
+            string hashedInputPassword = SecurityHelper.HashPassword(inputPassword);
+
+            if (user.PasswordHash == hashedInputPassword)
+            {
+                await DisplayAlert("Éxito", "Inicio de sesión exitoso.", "OK");
+                await Navigation.PushAsync(new Home(user));
+            }
+            else
+            {
+                await DisplayAlert("Error", "La contraseña es incorrecta. Intenta de nuevo.", "OK");
+            }
         }
-
-        // Genera el hash de la contraseña ingresada
-        string hashedInputPassword = Login.HashPassword(inputPassword);
-
-        // Compara el hash generado con el almacenado en la base de datos
-        if (user.PasswordHash == hashedInputPassword) // Verifica la propiedad correcta
+        catch (Exception ex)
         {
-            // Si coinciden, muestra un mensaje de éxito o continúa con el flujo
-            await DisplayAlert("Éxito", "Inicio de sesión exitoso.", "OK");
-            await Navigation.PushAsync(new Home());
-
+            await DisplayAlert("Error", $"Se produjo un error: {ex.Message}", "OK");
         }
-        else
-        {
-            await DisplayAlert("Error", "La contraseña es incorrecta. Intenta de nuevo.", "OK");
-            return;
-        }
-    }
-
-    // Método para hash de la contraseña
-    private static string HashPassword(string password)
-    {
-        byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
-        StringBuilder builder = new();
-        foreach (byte b in bytes)
-        {
-            builder.Append(b.ToString("x2")); // Formato hexadecimal
-        }
-        return builder.ToString();
     }
 
     private void SignUp_Clicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new Register());
     }
-
 }
-

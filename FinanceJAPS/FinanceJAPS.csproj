@@ -79,13 +79,16 @@
 	  <Compile Update="Pages\Analisys.xaml.cs">
 	    <DependentUpon>Analisys.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\BudgetPage.xaml.cs">
+	    <DependentUpon>BudgetPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Analisys.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Budget.xaml">
+	  <MauiXaml Update="Pages\BudgetPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ForgotPassword.xaml">

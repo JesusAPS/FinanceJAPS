@@ -18,7 +18,7 @@ namespace FinanceJAPS.Data.Models
         public int CategoryID { get; set; } // Clave foránea para la tabla Category
         public decimal Amount { get; set; } // Monto de la transacción
         public DateTime Date { get; set; } // Fecha de la transacción
-        public string Description { get; set; } // Descripción de la transacción
+        public required string Description { get; set; } // Descripción de la transacción
 
         // Objetos de navegación
         [Ignore]

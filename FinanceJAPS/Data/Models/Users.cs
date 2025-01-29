@@ -10,16 +10,16 @@ namespace FinanceJAPS.Data.Models
     public class Users
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; } // Identificador único para el usuario
+        public int UsuarioID { get; set; } // Identificador único para el usuario
         public string Name { get; set; } // Nombre del usuario
         [Unique]
-        public string Email { get; set; } // Email único
-        public string PasswordHash { get; set; } // Contraseña cifrada
+        public  string Email { get; set; } // Email único
+        public  string PasswordHash { get; set; } // Contraseña cifrada
         public DateTime DateCreate { get; set; } = DateTime.Now; // Fecha de creación del usuario
 
         // Relación con Budget
         [Ignore]
-        public List<Budget> Budgets { get; set; } // Lista de presupuestos del usuario
+        public  List<Budget> Budgets { get; set; } // Lista de presupuestos del usuario
     }
 }
 

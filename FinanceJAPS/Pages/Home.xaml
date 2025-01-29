@@ -1,3 +1,4 @@
+
 <ContentPage
     x:Class="FinanceJAPS.Pages.Home"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -191,9 +192,6 @@
                     HorizontalOptions="Center"
                     Text="Home"
                     TextColor="#00E5FF" />
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="Home" Tapped="NavigateToPage" />
-                </VerticalStackLayout.GestureRecognizers>
             </VerticalStackLayout>
             <!--  Budget  -->
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
@@ -206,9 +204,6 @@
                     HorizontalOptions="Center"
                     Text="Budget"
                     TextColor="#00E5FF" />
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="Budget" Tapped="NavigateToPage" />
-                </VerticalStackLayout.GestureRecognizers>
             </VerticalStackLayout>
             <!--  Transactions  -->
             <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
@@ -221,9 +216,6 @@
                     HorizontalOptions="Center"
                     Text="Transactions"
                     TextColor="#00E5FF" />
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="Transactions" Tapped="NavigateToPage" />
-                </VerticalStackLayout.GestureRecognizers>
             </VerticalStackLayout>
             <!--  Analisys  -->
             <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
@@ -236,9 +228,6 @@
                     HorizontalOptions="Center"
                     Text="Analisys"
                     TextColor="#00E5FF" />
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="Analisys" Tapped="NavigateToPage" />
-                </VerticalStackLayout.GestureRecognizers>
             </VerticalStackLayout>
 
             <!--  Settings  -->
@@ -252,11 +241,7 @@
                     HorizontalOptions="Center"
                     Text="Settings"
                     TextColor="#00E5FF" />
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="Settings" Tapped="NavigateToPage" />
-                </VerticalStackLayout.GestureRecognizers>
             </VerticalStackLayout>
-
         </Grid>
     </Grid>
 </ContentPage>

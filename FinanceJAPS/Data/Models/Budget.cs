@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite;
 
 namespace FinanceJAPS.Data.Models
@@ -10,20 +6,33 @@ namespace FinanceJAPS.Data.Models
     public class Budget
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; } // Identificador único para el presupuesto
+        public int BudgetID { get; set; } // Identificador único
+
         [Indexed]
-        public int UserID { get; set; } // Clave foránea para la tabla Users
+        public int UsuarioID { get; set; } // Clave foránea para la tabla Users
+
         [Indexed]
         public int CategoryID { get; set; } // Clave foránea para la tabla Category
-        public decimal Amount { get; set; } // Monto asignado
-        public DateTime Inicio { get; set; } // Fecha de inicio
-        public DateTime Fin { get; set; } // Fecha de fin
 
-        // Objetos de navegación
+        public decimal TotalBudget { get; set; } // Monto total asignado
+
+        public decimal Spent { get; set; } // Monto gastado
+
+        public DateTime Inicio { get; set; } // Fecha de inicio del presupuesto
+
+        public DateTime Fin { get; set; } // Fecha de fin del presupuesto
+
+        // Propiedad calculada (no se almacena en BD)
         [Ignore]
-        public Users User { get; set; } // Usuario asociado
+        public decimal Remaining => TotalBudget - Spent; // Dinero restante
+
+        // Objetos de navegación (Ignorados en SQLite)
         [Ignore]
-        public Category Category { get; set; } // Categoría asociada
+        public Users User { get; set; }
+
+        [Ignore]
+        public Category Category { get; set; }
     }
 }
+
 

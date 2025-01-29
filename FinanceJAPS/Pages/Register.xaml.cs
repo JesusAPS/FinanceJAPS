@@ -6,7 +6,12 @@ namespace FinanceJAPS.Pages
 {
     public partial class Register : ContentPage
     {
-        private DatabaseService _databaseService; // Servicio para interactuar con la base de datos
+        private readonly DatabaseService _databaseService; // Servicio para interactuar con la base de datos
+
+        public Register(DatabaseService databaseService )
+        {
+            _databaseService = databaseService;
+        }
 
         public Register()
         {
@@ -55,8 +60,8 @@ namespace FinanceJAPS.Pages
                 // Si la inserción fue exitosa
                 await DisplayAlert("Éxito", "Registro completado.", "OK");
 
-                // Esperar 5 segundos antes de redirigir
-                await Task.Delay(5000);
+                // Esperar 3 segundos antes de redirigir
+                await Task.Delay(3000);
 
                 // Navegar a la página de inicio de sesión
                 await Navigation.PushAsync(new Login());
@@ -71,19 +76,17 @@ namespace FinanceJAPS.Pages
         // Método para hash de la contraseña
         private string HashPassword(string password)
         {
-            using (SHA256 sha256 = SHA256.Create()) // Crear una instancia de SHA256
-            {
-                // Convertir la contraseña a un arreglo de bytes y calcular el hash
-                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            using SHA256 sha256 = SHA256.Create(); // Crear una instancia de SHA256
+                                                   // Convertir la contraseña a un arreglo de bytes y calcular el hash
+            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-                // Convertir el hash a una cadena hexadecimal
-                StringBuilder builder = new StringBuilder();
-                foreach (byte b in bytes)
-                {
-                    builder.Append(b.ToString("x2")); // Formato hexadecimal
-                }
-                return builder.ToString(); // Retorna el hash como cadena
+            // Convertir el hash a una cadena hexadecimal
+            StringBuilder builder = new();
+            foreach (byte b in bytes)
+            {
+                builder.Append(b.ToString("x2")); // Formato hexadecimal
             }
+            return builder.ToString(); // Retorna el hash como cadena
         }
     }
 }
