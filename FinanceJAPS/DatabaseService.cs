@@ -2,113 +2,188 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using FinanceJAPS.Data.Models;
 
 public class DatabaseService
 {
-    private readonly SQLiteConnection _database;
+    private readonly SQLiteAsyncConnection _database;
 
-    public DatabaseService()
+    public DatabaseService(string dbPath)
     {
-        var databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "financeJAPS.db3");
+        // Asegurar que la ruta de la base de datos sea correcta
+        var databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbPath);
         Console.WriteLine($"Ruta de la base de datos: {databasePath}");
 
-        _database = new SQLiteConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+        // Configurar la conexión a la base de datos
+        _database = new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
 
-        _database.CreateTable<Users>();
-        _database.CreateTable<Category>();
-        _database.CreateTable<Budget>();
-        _database.CreateTable<Transactions>();
-
-        Console.WriteLine($"Base de datos inicializada correctamente.");
+        // Crear tablas de manera asíncrona
+        InitializeDatabaseAsync().Wait();
     }
 
-
-    // Agregar Usuarios de manera asíncrona
-    public async Task<bool> InsertUserAsync(Users user)
-    {
-        return await Task.Run(() =>
-        {
-            try
-            {
-                var existingUser = _database.Table<Users>().FirstOrDefault(u => u.Email == user.Email);
-                if (existingUser != null)
-                {
-                    Console.WriteLine("El correo ya está en uso.");
-                    return false;
-                }
-
-                _database.Insert(user);
-                _database.Commit(); // Asegurar que los cambios se guardan
-
-                Console.WriteLine($"Usuario registrado: {user.Email}");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al insertar usuario: {ex.Message}");
-                return false;
-            }
-        });
-    }
-
-
-    public Users GetUserByEmail(string email)
+    private async Task InitializeDatabaseAsync()
     {
         try
         {
-            return _database.Table<Users>().FirstOrDefault(u => u.Email == email);
+            await _database.CreateTableAsync<User>();
+            await _database.CreateTableAsync<Category>();
+            await _database.CreateTableAsync<Budget>();
+            await _database.CreateTableAsync<Transaction>();
+            await _database.CreateTableAsync<DateAnalysis>();
+            await _database.CreateTableAsync<SavingsGoal>();
+            Console.WriteLine("Base de datos inicializada correctamente.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al inicializar la base de datos: {ex.Message}");
+        }
+    }
+
+    // Métodos para User
+    public async Task<bool> InsertUserAsync(User user)
+    {
+        try
+        {
+            var existingUser = await _database.Table<User>().FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (existingUser != null)
+            {
+                Console.WriteLine("El correo ya está en uso.");
+                return false;
+            }
+
+            await _database.InsertAsync(user);
+            Console.WriteLine($"Usuario registrado: {user.Email}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al insertar usuario: {ex.Message}");
+            return false;
+        }
+    }
+
+    public async Task<User> GetUserByEmailAsync(string email)
+    {
+        try
+        {
+            return await _database.Table<User>().FirstOrDefaultAsync(u => u.Email == email);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error al buscar usuario por email: {ex.Message}");
-            return null; // Retorna null si ocurre un error
+            return null;
         }
     }
 
-
-    public List<Users> GetAllUsers()
+    public async Task<List<User>> GetAllUsersAsync()
     {
-        return _database.Table<Users>().ToList();
+        return await _database.Table<User>().ToListAsync();
     }
 
-    public async Task<Users> GetUserByEmailAsync(string email)
+    // Métodos para Budget
+    public async Task<Budget> GetBudgetByUserIdAsync(int userId)
     {
-        return await Task.Run(() =>
-        {
-            return _database.Table<Users>().FirstOrDefault(u => u.Email == email);
-        });
+        return await _database.Table<Budget>().FirstOrDefaultAsync(b => b.UserID == userId);
     }
 
-
-    // Insertar a la Cartera
-    // Obtener el presupuesto actual
-    public async Task<Budget> GetBudgetAsync()
-    {
-        return await Task.Run(() =>
-        {
-            return _database.Table<Budget>().FirstOrDefault();
-        });
-    }
-
-    // Actualizar o insertar presupuesto
     public async Task UpdateBudgetAsync(Budget budget)
     {
-        await Task.Run(() =>
+        try
         {
-            var existingBudget = _database.Table<Budget>().FirstOrDefault();
+            var existingBudget = await _database.Table<Budget>()
+                .FirstOrDefaultAsync(b => b.UserID == budget.UserID);
+
             if (existingBudget != null)
             {
                 existingBudget.TotalBudget = budget.TotalBudget;
-                _database.Update(existingBudget);
+                existingBudget.Spent = budget.Spent;
+                await _database.UpdateAsync(existingBudget);
             }
             else
             {
-                _database.Insert(budget);
+                await _database.InsertAsync(budget);
             }
-        });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al actualizar presupuesto: {ex.Message}");
+        }
     }
 
+    // Métodos para Category
+    public async Task InsertCategoryAsync(Category category)
+    {
+        try
+        {
+            await _database.InsertAsync(category);
+            Console.WriteLine($"Categoría insertada: {category.CategoryName}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al insertar categoría: {ex.Message}");
+        }
+    }
+
+    public async Task<List<Category>> GetAllCategoriesAsync()
+    {
+        return await _database.Table<Category>().ToListAsync();
+    }
+
+    // Métodos para Transaction
+    public async Task InsertTransactionAsync(Transaction transaction)
+    {
+        try
+        {
+            await _database.InsertAsync(transaction);
+            Console.WriteLine($"Transacción insertada: {transaction.Description}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al insertar transacción: {ex.Message}");
+        }
+    }
+
+    public async Task<List<Transaction>> GetTransactionsByUserIdAsync(int userId)
+    {
+        return await _database.Table<Transaction>().Where(t => t.UserID == userId).ToListAsync();
+    }
+
+    // Métodos para SavingsGoal
+    public async Task InsertSavingsGoalAsync(SavingsGoal savingsGoal)
+    {
+        try
+        {
+            await _database.InsertAsync(savingsGoal);
+            Console.WriteLine($"Objetivo de ahorro insertado: {savingsGoal.Name}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al insertar objetivo de ahorro: {ex.Message}");
+        }
+    }
+
+    public async Task<List<SavingsGoal>> GetSavingsGoalsByUserIdAsync(int userId)
+    {
+        return await _database.Table<SavingsGoal>().Where(s => s.UserID == userId).ToListAsync();
+    }
+
+    // Métodos para DateAnalysis
+    public async Task InsertDateAnalysisAsync(DateAnalysis dateAnalysis)
+    {
+        try
+        {
+            await _database.InsertAsync(dateAnalysis);
+            Console.WriteLine($"Análisis mensual insertado: {dateAnalysis.Month}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al insertar análisis mensual: {ex.Message}");
+        }
+    }
+
+    public async Task<List<DateAnalysis>> GetDateAnalysisByUserIdAsync(int userId)
+    {
+        return await _database.Table<DateAnalysis>().Where(d => d.UserID == userId).ToListAsync();
+    }
 }
+

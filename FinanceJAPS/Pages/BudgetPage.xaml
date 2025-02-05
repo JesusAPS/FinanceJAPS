@@ -24,9 +24,9 @@
                                 Text="Total Budget"
                                 TextColor="Gray" />
                             <Label
-                                x:Name="TotalBudgetLabel"
                                 FontAttributes="Bold"
                                 FontSize="18"
+                                Text="{Binding TotalBudget, StringFormat='${0:F2}'}"
                                 TextColor="Black" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
@@ -35,9 +35,9 @@
                                 Text="Spent"
                                 TextColor="Gray" />
                             <Label
-                                x:Name="SpentLabel"
                                 FontAttributes="Bold"
                                 FontSize="18"
+                                Text="{Binding Spent, StringFormat='${0:F2}'}"
                                 TextColor="Red" />
                         </VerticalStackLayout>
                         <VerticalStackLayout>
@@ -46,9 +46,9 @@
                                 Text="Remaining"
                                 TextColor="Gray" />
                             <Label
-                                x:Name="RemainingLabel"
                                 FontAttributes="Bold"
                                 FontSize="18"
+                                Text="{Binding Remaining, StringFormat='${0:F2}'}"
                                 TextColor="Green" />
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
@@ -67,7 +67,8 @@
                     <Entry
                         x:Name="IncomeAmountEntry"
                         Keyboard="Numeric"
-                        Placeholder="Enter amount" />
+                        Placeholder="Enter amount"
+                        TextColor="Black" />
 
                     <Button
                         BackgroundColor="#00E5FF"
@@ -110,3 +111,4 @@
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
+

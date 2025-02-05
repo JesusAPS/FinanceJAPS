@@ -1,71 +1,132 @@
 using FinanceJAPS.Data.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 
 namespace FinanceJAPS.Pages
 {
-    public partial class BudgetPage : ContentPage // Renombrado a BudgetPage
+    public partial class BudgetPage : ContentPage, INotifyPropertyChanged
     {
         private readonly DatabaseService _databaseService;
+        private readonly Users _currentUser;
 
-        public BudgetPage()
+        private decimal _totalBudget;
+        public decimal TotalBudget
+        {
+            get => _totalBudget;
+            set { _totalBudget = value; OnPropertyChanged(); }
+        }
+
+        private decimal _spent;
+        public decimal Spent
+        {
+            get => _spent;
+            set { _spent = value; OnPropertyChanged(); }
+        }
+
+        private decimal _remaining;
+        public decimal Remaining
+        {
+            get => _remaining;
+            set { _remaining = value; OnPropertyChanged(); }
+        }
+
+        public BudgetPage(DatabaseService databaseService, Users user)
         {
             InitializeComponent();
-            _databaseService = new DatabaseService();
-            LoadBudgetData(); // Cargar datos al abrir la página
-
+            _databaseService = databaseService;
+            _currentUser = user ?? throw new ArgumentNullException(nameof(user));
+            BindingContext = this; // Vincular la página al contexto de datos
+            _ = LoadBudgetData();
         }
 
         private async void AddIncome_Clicked(object sender, EventArgs e)
         {
             if (decimal.TryParse(IncomeAmountEntry.Text, out decimal amount) && amount > 0)
             {
-                // Obtener el presupuesto actual de la BD
-                var currentBudget = await _databaseService.GetBudgetAsync();
+                var currentBudget = await _databaseService.GetBudgetByUserIdAsync(_currentUser.UsuarioID);
 
                 if (currentBudget == null)
                 {
-                    currentBudget = new Budget { TotalBudget = 0, Spent = 0 };
+                    // Asegurar que se asigne el UserID cuando se crea un presupuesto nuevo
+                    currentBudget = new Budget
+                    {
+                        UsuarioID = _currentUser.UsuarioID,
+                        TotalBudget = 0,
+                        Spent = 0
+                    };
                 }
 
-                // Actualizar el presupuesto con el nuevo ingreso
                 currentBudget.TotalBudget += amount;
-
-                // Guardar en la base de datos
                 await _databaseService.UpdateBudgetAsync(currentBudget);
 
-                // Actualizar UI
-                LoadBudgetData();
+                // Verificar en la consola si se está guardando el ID del usuario
+                Console.WriteLine($"Budget actualizado: ID Usuario = {currentBudget.UsuarioID}, TotalBudget = {currentBudget.TotalBudget}");
 
-                await DisplayAlert("Success", "Income added successfully!", "OK");
-                IncomeAmountEntry.Text = ""; // Limpiar campo
+                // Asegurar que la UI se actualiza en el hilo principal
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    TotalBudget = currentBudget.TotalBudget;
+                    Spent = currentBudget.Spent;
+                    Remaining = TotalBudget - Spent;
+
+                    OnPropertyChanged(nameof(TotalBudget));
+                    OnPropertyChanged(nameof(Spent));
+                    OnPropertyChanged(nameof(Remaining));
+                });
+
+
+                await DisplayAlert("Éxito", "Ingreso agregado correctamente.", "OK");
+                IncomeAmountEntry.Text = "";
             }
             else
             {
-                await DisplayAlert("Error", "Please enter a valid amount.", "OK");
+                await DisplayAlert("Error", "Por favor ingresa una cantidad válida.", "OK");
             }
         }
 
-        private void LoadBudgetData()
+
+        private async Task LoadBudgetData()
         {
-            var currentBudget = _databaseService.GetBudgetAsync().Result;
+            if (_currentUser == null)
+            {
+                await DisplayAlert("Error", "El usuario no está autenticado.", "OK");
+                return;
+            }
+
+            var currentBudget = await _databaseService.GetBudgetByUserIdAsync(_currentUser.UsuarioID);
 
             if (currentBudget != null)
             {
-                TotalBudgetLabel.Text = $"${currentBudget.TotalBudget:F2}";
-                SpentLabel.Text = $"${currentBudget.Spent:F2}";
-                RemainingLabel.Text = $"${(currentBudget.TotalBudget - currentBudget.Spent):F2}";
+                Console.WriteLine($"Usuario ID: {_currentUser.UsuarioID}");
+                Console.WriteLine($"Presupuesto encontrado - ID: {currentBudget.BudgetID}, UsuarioID: {currentBudget.UsuarioID}, Total: {currentBudget.TotalBudget}");
+
+                TotalBudget = currentBudget.TotalBudget;
+                Spent = currentBudget.Spent;
+                Remaining = currentBudget.TotalBudget - currentBudget.Spent;
+
+                // Forzar actualización de la UI manualmente
+                OnPropertyChanged(nameof(TotalBudget));
+                OnPropertyChanged(nameof(Spent));
+                OnPropertyChanged(nameof(Remaining));
             }
             else
             {
-                TotalBudgetLabel.Text = "$0.00";
-                SpentLabel.Text = "$0.00";
-                RemainingLabel.Text = "$0.00";
+                Console.WriteLine($"No se encontró un presupuesto para el usuario con ID: {_currentUser.UsuarioID}");
+                TotalBudget = 0;
+                Spent = 0;
+                Remaining = 0;
             }
         }
 
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -1,9 +1,14 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using FinanceJAPS.Pages;
+using SQLite;
 
 namespace FinanceJAPS.Pages
 {
     public partial class Home : ContentPage
     {
+        private readonly DatabaseService _databaseService;
+        private readonly Data.Models.Users _currentUser; // 🟢 Guardar el usuario autenticado
+
         public ObservableCollection<Transaction> Transactions { get; set; }
         public Command<string> NavigateCommand { get; set; }
 
@@ -11,7 +16,12 @@ namespace FinanceJAPS.Pages
         {
             InitializeComponent();
 
-            // Inicializar colecciones y comandos
+            _currentUser = user; // 🟢 Guardamos el usuario autenticado
+
+            // Inicializar DatabaseService
+            _databaseService = new DatabaseService(App.dbPath);
+
+            // Inicializar lista de transacciones de prueba
             Transactions = new ObservableCollection<Transaction>
             {
                 new Transaction("Salary", 4000),
@@ -22,12 +32,16 @@ namespace FinanceJAPS.Pages
 
             NavigateCommand = new Command<string>(NavigateToPage);
 
-            // Establecer el BindingContext
+            // Establecer BindingContext
             BindingContext = this;
+
+            // 🟢 (Opcional) Mostrar nombre del usuario en la UI
+            DisplayWelcomeMessage();
         }
 
-        public Home()
+        private void DisplayWelcomeMessage()
         {
+            DisplayAlert("Bienvenido", $"Hola, {_currentUser.Name}!", "OK");
         }
 
         private async void NavigateToPage(string pageName)
@@ -36,10 +50,9 @@ namespace FinanceJAPS.Pages
             {
                 Page page = pageName switch
                 {
-                    "Home" => new Home(),
                     "Transactions" => new Transactions(),
                     "Analysis" => new Analisys(),
-                    "BudgetPage" => new BudgetPage(),
+                    "BudgetPage" => new BudgetPage(_databaseService, _currentUser), // 🟢 Pasar usuario
                     "Settings" => new Settings(),
                     _ => null
                 };
@@ -56,6 +69,20 @@ namespace FinanceJAPS.Pages
             catch (Exception ex)
             {
                 await DisplayAlert("Navigation Error", $"Failed to navigate: {ex.Message}", "OK");
+            }
+        }
+
+        private async void OnBudgetTapped(object sender, EventArgs e)
+        {
+            // Verifica si _currentUser es null antes de navegar
+            if (_currentUser != null)
+            {
+                // Pasa el usuario y el servicio de base de datos correctamente
+                await Navigation.PushAsync(new BudgetPage(_databaseService, _currentUser));
+            }
+            else
+            {
+                await DisplayAlert("Error", "No se encontró el usuario autenticado.", "OK");
             }
         }
     }

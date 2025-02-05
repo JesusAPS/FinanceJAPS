@@ -10,15 +10,11 @@ namespace FinanceJAPS.Pages
 
         public Register(DatabaseService databaseService )
         {
+            InitializeComponent(); // Inicializa los componentes de la página
             _databaseService = databaseService;
         }
 
-        public Register()
-        {
-            InitializeComponent(); // Inicializa los componentes de la página
-            _databaseService = new DatabaseService(); // Crea una instancia del servicio de base de datos
-        }
-
+     
         private async void OnSignUpButtonClicked(object sender, EventArgs e)
         {
             // Obtener los datos ingresados por el usuario

@@ -182,23 +182,17 @@
             </Grid.ColumnDefinitions>
 
             <!--  Botones del Menú  -->
-            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
-                <Image
-                    HeightRequest="64"
-                    Source="home.png"
-                    WidthRequest="64" />
-                <Label
-                    FontSize="12"
-                    HorizontalOptions="Center"
-                    Text="Home"
-                    TextColor="#00E5FF" />
-            </VerticalStackLayout>
             <!--  Budget  -->
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
                 <Image
+                    x:Name="budgetPage"
                     HeightRequest="64"
                     Source="budget.png"
-                    WidthRequest="64" />
+                    WidthRequest="64">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBudgetTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
                 <Label
                     FontSize="12"
                     HorizontalOptions="Center"

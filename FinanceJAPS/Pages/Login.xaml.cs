@@ -11,7 +11,7 @@ public partial class Login : ContentPage
     public Login()
     {
         InitializeComponent();
-        _databaseService = new DatabaseService();
+        _databaseService = App.DataBase ?? throw new Exception("Base de Datos no está inicializada");
     }
 
     private async void LogIn_Clicked(object sender, EventArgs e)
@@ -51,6 +51,8 @@ public partial class Login : ContentPage
             if (user.PasswordHash == hashedInputPassword)
             {
                 await DisplayAlert("Éxito", "Inicio de sesión exitoso.", "OK");
+
+                // PASAR el usuario autenticado a Home
                 await Navigation.PushAsync(new Home(user));
             }
             else
@@ -66,6 +68,6 @@ public partial class Login : ContentPage
 
     private void SignUp_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Register());
+        Navigation.PushAsync(new Register(_databaseService));
     }
 }
